@@ -1,0 +1,75 @@
+.container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+
+.canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100%;
+  z-index: -1; /* 背景として配置 */
+  background-color: #f1b642;
+}
+
+.jokeBox, .title, .explanationBox {
+  position: relative;
+  z-index: 1; /* その他の要素を前面に表示 */
+}
+
+
+.jokeBox, .explanationBox {
+  margin: 20px;
+  background-color: rgba(255, 255, 255, 0.7); /* 半透明の背景色 */
+  padding: 10px;
+  border-radius: 10px;
+}
+
+
+.jokeBox {
+  background-color: #ffffff;
+  padding: 1rem 2rem;
+  border-radius: 20px;
+  color: #333;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  text-align: center;
+  width: 80%;
+  max-width: 400px;
+}
+
+.title {
+  font-size: 4rem;
+  color: #000;
+  text-shadow: -2px 2px #fff;
+  margin-bottom: 2rem;
+}
+
+.explanationBox {
+  display: flex;
+  background-color: #ffffff;
+  padding: 1rem;
+  border-radius: 10px;
+  color: #666;
+  font-size: 1rem;
+  text-align: center;
+  width: 80%;
+  max-width: 400px;
+  margin-bottom: 1rem;
+}
+
+
+/* Next.jsのImageコンポーネント用のクラス */
+.scatteredImage {
+  opacity: 0.8;
+}
+
+.imgContainer {
+  display: flex;
+}
