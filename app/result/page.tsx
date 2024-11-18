@@ -1,12 +1,16 @@
-"use client";
+"use client"
 
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import styles from "./Result.module.css";
+import { useSearchParams } from "next/navigation";
 
 const Result = () => {
+  const params = useSearchParams()
+
   const images = ["/futon0.png", "/futon1.png", "/futon2.png", "/futon3.png", "/futon4.png"];
   const [isVisible, setIsVisible] = useState(true);
+
 
   useEffect(() => {
     const hideTimeout = setTimeout(() => {
@@ -22,7 +26,7 @@ const Result = () => {
   return (
     <div className={styles.container}>
       <div className={styles.jokeBox}>ダジャレがここに入ります</div>
-      <h1 className={styles.title}>70点</h1>
+      <h1 className={styles.title}>{`${params.getAll("number")}`}</h1>
       <div className={styles.explanationBox}>ダジャレの解説文がここに入ります。</div>
 
       <div className={styles.imgContainer}>
