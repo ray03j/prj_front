@@ -11,6 +11,7 @@ const Result = () => {
   const images = ["/futon0.png", "/futon1.png", "/futon2.png", "/futon3.png", "/futon4.png"];
   const [isVisible, setIsVisible] = useState(true);
 
+  const number = parseInt(params.getAll("number")[0], 10);
 
   useEffect(() => {
     const hideTimeout = setTimeout(() => {
@@ -27,13 +28,13 @@ const Result = () => {
     <div className={styles.container}>
       <div className={styles.jokeBox}>{`${params.getAll("text")}`}</div>
       <div className={styles.scoreContainer}>
-        <div className={styles.score}>{`${params.getAll("number")}`}</div>
+        <div className={styles.score}>{`${number}`}</div>
         <div className={styles.maxScore}>/5</div>
       </div>
       <div className={styles.explanationBox}>ダジャレの解説文がここに入ります。</div>
 
       <div className={styles.imgContainer}>
-        {images.map((src, index) => (
+        {images.slice(0, number).map((src, index) => (
           <motion.img
             key={index}
             src={src}
