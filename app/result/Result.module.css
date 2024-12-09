@@ -8,7 +8,7 @@
   background-color: #f1b642;
 }
 
-.jokeBox, .title, .explanationBox {
+.jokeBox, .score, .maxScore, .explanationBox {
   position: relative;
   z-index: 1; /* その他の要素を前面に表示 */
 }
@@ -34,11 +34,23 @@
   max-width: 400px;
 }
 
-.title {
+.score {
   font-size: 4rem;
   color: #000;
   text-shadow: -2px 2px #fff;
   margin-bottom: 2rem;
+}
+
+.maxScore {
+  font-size: 3rem;
+  color: #000;
+  text-shadow: -2px 2px #fff;
+  margin-top: 1rem;
+  margin-left: 1rem;
+}
+
+.scoreContainer {
+  display: flex;
 }
 
 .explanationBox {

@@ -24,7 +24,7 @@ export default function Home() {
       params.append("number", Length); // 取得した数字をクエリに追加
 
       // リダイレクト
-      const href = `/result?${params}`;
+      const href = `/result?text=${text}&${params}`;
       router.push(href); // URLは /result?number=123 のようになる
     } catch (error) {
       console.error(error)

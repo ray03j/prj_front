@@ -25,8 +25,11 @@ const Result = () => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.jokeBox}>ダジャレがここに入ります</div>
-      <h1 className={styles.title}>{`${params.getAll("number")}`}</h1>
+      <div className={styles.jokeBox}>{`${params.getAll("text")}`}</div>
+      <div className={styles.scoreContainer}>
+        <div className={styles.score}>{`${params.getAll("number")}`}</div>
+        <div className={styles.maxScore}>/5</div>
+      </div>
       <div className={styles.explanationBox}>ダジャレの解説文がここに入ります。</div>
 
       <div className={styles.imgContainer}>
