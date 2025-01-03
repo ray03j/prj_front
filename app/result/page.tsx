@@ -4,16 +4,38 @@ import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import styles from "./Result.module.css";
 import { useSearchParams } from "next/navigation";
+import axios from "axios";
 
 const Result = () => {
   const params = useSearchParams()
 
   const images = ["/futon0.png", "/futon1.png", "/futon2.png", "/futon3.png", "/futon4.png"];
   const [isVisible, setIsVisible] = useState(true);
-
+  const [explanation, setExplanation] = useState("解説を取得中..."); // 解説文の状態を管理
   const number = parseInt(params.getAll("number")[0], 10);
+  const dajare = params.getAll("text")[0];
 
+
+  const fetchExplanation = async () => {
+    try {
+      const response = await axios.post("http://localhost:8000/explanation", {
+        dajare: dajare
+      });
+      const formatedExplanation = response.data.response
+      .replace(/```/g, '')
+      .replace(/text/g, '')
+      .replace(/string/g, '')
+      .replace(/plain/g, '')
+      setExplanation(formatedExplanation+"\n"); // 解説文を設定
+    } catch (error) {
+      console.error("Failed to fetch explanation:", error);
+      setExplanation("解説を取得できませんでした。");
+    }
+  };
+  
   useEffect(() => {
+    fetchExplanation();
+
     const hideTimeout = setTimeout(() => {
       setIsVisible(false);
     }, 2500); // 2.5秒後に非表示
@@ -26,12 +48,12 @@ const Result = () => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.jokeBox}>{`${params.getAll("text")}`}</div>
+      <div className={styles.jokeBox}>{`${dajare}`}</div>
       <div className={styles.scoreContainer}>
         <div className={styles.score}>{`${number}`}</div>
         <div className={styles.maxScore}>/5</div>
       </div>
-      <div className={styles.explanationBox}>ダジャレの解説文がここに入ります。</div>
+      <div className={styles.explanationBox}>{explanation}</div>
 
       <div className={styles.imgContainer}>
         {images.slice(0, number).map((src, index) => (

@@ -17,11 +17,11 @@ export default function Home() {
         params: {query: text}
       });
       
-      const {Score, Length} = response.data; // 返り値の数字を取得
+      const {Score} = response.data; // 返り値の数字を取得
       
       // クエリパラメータを生成
       const params = new URLSearchParams();
-      params.append("number", Length); // 取得した数字をクエリに追加
+      params.append("number", Score); // 取得した数字をクエリに追加
 
       // リダイレクト
       const href = `/result?text=${text}&${params}`;

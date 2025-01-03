@@ -60,10 +60,10 @@
   border-radius: 10px;
   color: #666;
   font-size: 1rem;
-  text-align: center;
-  width: 80%;
-  max-width: 400px;
+  width: 100%;
+  max-width: 600px;
   margin-bottom: 1rem;
+  white-space: pre-wrap; /* 改行やスペースをそのまま表示 */
 }
 
 
