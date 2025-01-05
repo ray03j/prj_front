@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import styles from "./Result.module.css";
 import { useSearchParams } from "next/navigation";
 import axios from "axios";
+import Link from "next/link";
 
 const Result = () => {
   const params = useSearchParams()
@@ -14,7 +15,7 @@ const Result = () => {
   const [explanation, setExplanation] = useState("解説を取得中..."); // 解説文の状態を管理
   const number = parseInt(params.getAll("number")[0], 10);
   const dajare = params.getAll("text")[0];
-
+  const isSettai = true;
 
   const fetchExplanation = async () => {
     try {
@@ -32,9 +33,35 @@ const Result = () => {
       setExplanation("解説を取得できませんでした。");
     }
   };
+
+  const fetchSettai = async () => {
+    try {
+      const response = await axios.post("http://localhost:8000/settai", {
+        dajare: dajare
+      });
+      const formatedExplanation = response.data.response
+      .replace(/```/g, '')
+      .replace(/text/g, '')
+      .replace(/string/g, '')
+      .replace(/plain/g, '')
+      setExplanation(formatedExplanation+"\n"); // 解説文を設定
+    } catch (error) {
+      console.error("Failed to fetch explanation:", error);
+      setExplanation("解説を取得できませんでした。");
+    }
+  } 
+
+  
+  const fetchData = () => {
+    if(isSettai) {
+      fetchSettai();
+    } else {
+      fetchExplanation();
+    }
+  }
   
   useEffect(() => {
-    fetchExplanation();
+    fetchData();
 
     const hideTimeout = setTimeout(() => {
       setIsVisible(false);
@@ -83,6 +110,7 @@ const Result = () => {
           />
         ))}
       </div>
+      <Link href="/" className={styles.button}>BACK</Link>
     </div>
   );
 };
