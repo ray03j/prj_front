@@ -4,20 +4,24 @@ import axios from "axios";
 import styles from "./Home.module.css"
 import { useRouter } from "next/navigation";
 import { ChangeEvent, useState } from "react";
+import { isSettai } from "@/app/constants";
 
 export default function Home() {
   const router = useRouter();
   const [text, setText] = useState("")
 
   const handleClick = async () =>{
-
+    console.log("clicked")
     try {
       // APIを呼び出し
       const response = await axios.get("http://localhost:8000/", {
-        params: {query: text}
+        params: {dajare: text}
       });
       
-      const {Score} = response.data; // 返り値の数字を取得
+      let {Score} = response.data; // 返り値の数字を取得
+      if(isSettai){
+        Score = Score *1.5
+      }
       
       // クエリパラメータを生成
       const params = new URLSearchParams();

@@ -6,6 +6,7 @@ import styles from "./Result.module.css";
 import { useSearchParams } from "next/navigation";
 import axios from "axios";
 import Link from "next/link";
+import { isSettai } from "@/app/constants";
 
 const Result = () => {
   const params = useSearchParams()
@@ -15,7 +16,6 @@ const Result = () => {
   const [explanation, setExplanation] = useState("解説を取得中..."); // 解説文の状態を管理
   const number = parseInt(params.getAll("number")[0], 10);
   const dajare = params.getAll("text")[0];
-  const isSettai = true;
 
   const fetchExplanation = async () => {
     try {
@@ -78,7 +78,7 @@ const Result = () => {
       <div className={styles.jokeBox}>{`${dajare}`}</div>
       <div className={styles.scoreContainer}>
         <div className={styles.score}>{`${number}`}</div>
-        <div className={styles.maxScore}>/5</div>
+        <div className={styles.maxScore}>/100</div>
       </div>
       <div className={styles.explanationBox}>{explanation}</div>
 
