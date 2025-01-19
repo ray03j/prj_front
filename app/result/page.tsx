@@ -20,7 +20,8 @@ const Result = () => {
   const fetchExplanation = async () => {
     try {
       const response = await axios.post("http://localhost:8000/explanation", {
-        dajare: dajare
+        dajare: dajare,
+        score: number
       });
       const formatedExplanation = response.data.response
       .replace(/```/g, '')
@@ -37,7 +38,8 @@ const Result = () => {
   const fetchSettai = async () => {
     try {
       const response = await axios.post("http://localhost:8000/settai", {
-        dajare: dajare
+        dajare: dajare,
+        score: number
       });
       const formatedExplanation = response.data.response
       .replace(/```/g, '')
@@ -53,6 +55,10 @@ const Result = () => {
 
   
   const fetchData = () => {
+    if (number==0) {
+      setExplanation("ダジャレと判定されませんでした。");
+      return;
+    }
     if(isSettai) {
       fetchSettai();
     } else {
