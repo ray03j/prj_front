@@ -1,1 +1,2 @@
-export const isSettai = false;
+// TA用接待モード
+export const isSettai = true;
