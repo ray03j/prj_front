@@ -21,6 +21,9 @@ export default function Home() {
       let {Score} = response.data; // 返り値の数字を取得
       if(isSettai){
         Score = Score *1.5
+        if(Score > 100){
+          Score = 100
+        }
       }
       
       // クエリパラメータを生成
